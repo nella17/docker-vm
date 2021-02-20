@@ -3,7 +3,7 @@ FROM ubuntu:20.10
 RUN apt-get update -qq
 
 RUN apt-get install -y -qqq --no-install-recommends \
-    sudo zsh tmux git vim wget curl htop rsync \
+    sudo file zsh tmux git vim wget curl htop rsync \
     strace ltrace tree make cmake elfutils \
     gdb locales python3 python3-pip binutils \
     gcc musl-tools nasm radare2 \
