@@ -1,4 +1,4 @@
-bindkey -v
+bindkey -e
 setopt HIST_IGNORE_ALL_DUPS
 setopt EXTENDED_HISTORY
 setopt INC_APPEND_HISTORY
