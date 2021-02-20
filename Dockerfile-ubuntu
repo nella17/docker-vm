@@ -1,5 +1,4 @@
 FROM ubuntu:20.10
-MAINTAINER nella17
 
 RUN apt-get update -qq
 

@@ -1,5 +1,4 @@
 FROM frolvlad/alpine-glibc
-MAINTAINER nella17
 
 RUN apk update
 
