@@ -14,7 +14,7 @@ RUN apt-get install -y -qqq --no-install-recommends \
     apt-get clean -y
 
 RUN locale-gen --purge "en_US.UTF-8" && \
-    echo -e 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale && \
+    echo 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale && \
     dpkg-reconfigure --frontend=noninteractive locales
 
 RUN if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
@@ -24,5 +24,7 @@ RUN if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
 RUN gem install --no-document one_gadget
 
 COPY root /root
+ENV PATH="/root/bin:${PATH}"
+ENV LANG="en_US.UTF-8"
 
 CMD zsh

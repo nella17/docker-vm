@@ -12,5 +12,3 @@ setopt HIST_REDUCE_BLANKS
 setopt clobber
 setopt NULL_GLOB
 
-export PATH="$HOME/bin:$PATH"
-export LANG=en_US.UTF-8
