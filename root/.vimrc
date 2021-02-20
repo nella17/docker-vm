@@ -27,8 +27,8 @@ set bg=dark
 hi Normal guibg=NONE ctermbg=NONE
 
 filetype indent plugin on
-# au BufRead,BufWritePre * if &modifiable | %retab!
-# au InsertLeave,BufWritePre * %s/\s\+$//e
+"au BufRead,BufWritePre * if &modifiable | %retab!
+"au InsertLeave,BufWritePre * %s/\s\+$//e
 
 "set listchars=eol:$,tab:>-,trail:~,extends:>,precedes:<
 "set list
