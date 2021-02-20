@@ -27,4 +27,4 @@ COPY root /root
 ENV PATH="/root/bin:${PATH}"
 ENV LANG="en_US.UTF-8"
 
-CMD zsh
+CMD ["/usr/bin/zsh"]
