@@ -12,3 +12,5 @@ setopt HIST_REDUCE_BLANKS
 setopt clobber
 setopt NULL_GLOB
 
+alias l='ls -ahl'
+alias rm='rm -i'
