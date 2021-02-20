@@ -1,0 +1,33 @@
+#!/bin/bash
+set -euo pipefail
+fn=${1?"need file name"}
+
+ARGS=''
+if [ $# = 1 ] || [ $2 = true ] || [ $2 = 1 ]; then
+    ARGS="${ARGS:+$ARGS }-DDEBUG"
+  # if ! [[ "$ARGS" =~ "-O" ]]; then
+  #     ARGS="${ARGS:+$ARGS }-Og"
+  # fi
+fi
+if [ $# -ge 3 ]; then
+    ARGS="${ARGS:+$ARGS }$(echo $* | cut -d ' ' -f 3-)"
+fi
+if ! [[ "$ARGS" =~ "-std=" ]]; then
+    ARGS="${ARGS:+$ARGS }-std=c++17"
+fi
+
+file_name="$(sha1sum "$1" | awk '{print $1}')-$(echo $ARGS | sha1sum | awk '{print $1}').out"
+dir='/tmp/run_c'
+mkdir -p $dir
+file="$dir/$file_name"
+
+INCLUDE="-I$HOME/project/tools/include -I$HOME/project/tools/boost_1_73_0 -I/usr/local/include"
+
+>&2 echo \$ARGS=\'"$ARGS"\'
+>&2 echo $file
+if [ -e "$file" ] && [ 1 = 1 ]; then
+  >&2 echo "cached file exist!"
+else
+  time /usr/local/bin/g++-10 $ARGS $INCLUDE -Wall -Wextra -Wshadow "$fn" -o "$file"
+fi
+time "$file"

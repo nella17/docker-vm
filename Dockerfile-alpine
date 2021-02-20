@@ -1,0 +1,6 @@
+FROM frolvlad/alpine-glibc
+
+RUN apk update
+
+COPY setup/setup-alpine.sh /setup.sh
+RUN /setup.sh
