@@ -18,5 +18,5 @@ docker run --rm -dt \
   --security-opt seccomp=unconfined \
   nella17/vm &> /dev/null
 docker exec -it -w '/data' $name zsh -c "source ~/.zshrc && $cmd"
-docker stop $name >/dev/null
+docker stop $name >/dev/null &
 ```
