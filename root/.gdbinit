@@ -1,8 +1,9 @@
 set history filename ~/.gdb_history
 set disassembly-flavor intel
+set print asm-demangle on
 
 define peda
-  source ~/tools/peda/peda.py
+  source ~/peda/peda.py
   pset option autosave 'off'
 end
 
@@ -11,7 +12,7 @@ define gef
 end
 
 define pwndbg-init
-  source ~/tools/pwndbg/gdbinit.py
+  source ~/pwndbg/gdbinit.py
 end
 
 define ta
