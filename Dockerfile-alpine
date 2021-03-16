@@ -4,10 +4,10 @@ RUN apk update && \
     apk add --no-cache \
       sudo file zsh tmux git vim wget curl htop rsync \
       strace ltrace tree make cmake elfutils binutils \
-      gdb locales python3 mingw-w64-gcc \
-      g++ nasm radare2 lib32z1 \
-      libc-dev linux-headers \
-      bc bison flex perl openssl ruby-dev
+      gdb python3-dev cargo \
+      g++ mingw-w64-gcc nasm radare2 \
+      libc-dev linux-headers libffi-dev \
+      bc bison flex perl openssl-dev ruby-dev
 
 RUN if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
     python3 -m ensurepip && \
