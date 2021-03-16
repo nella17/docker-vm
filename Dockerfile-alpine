@@ -5,7 +5,7 @@ RUN apk update && \
       sudo file zsh tmux git vim wget curl htop rsync \
       strace ltrace tree make cmake elfutils binutils \
       gdb python3-dev cargo \
-      g++ mingw-w64-gcc nasm radare2 \
+      g++ nasm radare2 \
       libc-dev linux-headers libffi-dev \
       bc bison flex perl openssl-dev ruby-dev
 
@@ -22,4 +22,4 @@ ENV LANG="en_US.UTF-8"
 
 COPY root /root
 
-CMD ["/usr/bin/zsh"]
+CMD ["/bin/zsh"]
