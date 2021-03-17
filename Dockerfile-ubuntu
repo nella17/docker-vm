@@ -7,7 +7,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     sudo file less zsh tmux git vim wget curl htop rsync \
     strace ltrace tree make cmake elfutils netcat \
     gdb locales python3 python3-pip binutils \
-    gcc musl-tools nasm radare2 lib32z1 autoconf \
+    g++ g++-multilib musl-tools nasm radare2 lib32z1 autoconf \
     build-essential libncurses-dev libssl-dev libffi-dev \
     bc bison flex perl openssl ruby-dev && \
     apt-get purge -y && \
