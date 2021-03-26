@@ -22,18 +22,18 @@ RUN DEBIAN_FRONTEND=noninteractive \
     strace ltrace tree make cmake elfutils netcat \
     gdb locales binutils g++ g++-multilib musl-tools nasm lib32z1 \
     build-essential perl openssl ruby-dev \
-    && apt-get clean
-
-RUN DEBIAN_FRONTEND=noninteractive \
-    locale-gen --purge "en_US.UTF-8" && \
-    echo 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale && \
-    dpkg-reconfigure --frontend=noninteractive locales
+    && apt-get clean \
+    && locale-gen --purge "en_US.UTF-8" \
+    && echo 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale \
+    && dpkg-reconfigure --frontend=noninteractive locales
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
-        libncurses-dev libssl-dev libffi-dev \
+        libncurses-dev libssl-dev libffi-dev cargo \
     && python3 -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
-    && apt-get remove -y \
-        libncurses-dev libssl-dev libffi-dev \
+    && apt-get remove -y --auto-remove \
+        libncurses-dev libssl-dev libffi-dev cargo \
+    && apt-get purge --auto-remove \
+        libncurses-dev libssl-dev libffi-dev cargo \
     && apt-get clean
 RUN gem install --no-document one_gadget seccomp-tools
 
