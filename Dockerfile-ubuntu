@@ -1,36 +1,51 @@
-FROM ubuntu:20.10
+FROM ubuntu:latest
 
-RUN apt-get update -qq
+RUN : \
+    && apt-get update -qq \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
+        software-properties-common \
+    && add-apt-repository ppa:deadsnakes \
+    && apt-get update -qq \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
+        python3.10-dev \
+    && ln -sf python3.10 python \
+    && ln -sf python3.10 python3 \
+    && python3 -m ensurepip \
+    && rm -r /usr/lib/python*/ensurepip \
+    && python3 -m pip install --no-cache-dir -U pip setuptools wheel \
+    && ln -sf pip3 /usr/bin/pip \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get install -y -qqq --no-install-recommends \
-    sudo file less zsh tmux git vim wget curl htop rsync \
+    sudo file less zsh tmux git vim wget curl rsync \
     strace ltrace tree make cmake elfutils netcat \
-    gdb locales python3 python3-pip binutils \
-    g++ g++-multilib musl-tools nasm radare2 lib32z1 autoconf \
-    build-essential libncurses-dev libssl-dev libffi-dev \
-    bc bison flex perl openssl ruby-dev && \
-    apt-get purge -y && \
-    apt-get clean -y && \
-    rm -rf /var/lib/apt/lists/*
+    gdb locales binutils g++ g++-multilib musl-tools nasm lib32z1 \
+    build-essential perl openssl ruby-dev \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN DEBIAN_FRONTEND=noninteractive \
     locale-gen --purge "en_US.UTF-8" && \
     echo 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale && \
     dpkg-reconfigure --frontend=noninteractive locales
 
-RUN if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    python3 -m pip --no-cache-dir install pwntools unicorn capstone ropper keystone-engine
-
+RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
+        libncurses-dev libssl-dev libffi-dev cargo \
+    && python3 -m pip --no-cache-dir -U install pwntools unicorn capstone ropper keystone-engine \
+    && apt-get remove -y \
+        libncurses-dev libssl-dev libffi-dev cargo \
+    && apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
 RUN gem install --no-document one_gadget seccomp-tools
 
 # RUN cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
 
-COPY libc /libc
-COPY root /root
-
 ENV PATH="/root/bin:${PATH}"
 ENV LANG="en_US.UTF-8"
+
+COPY libc /libc
+COPY root /root
 
 CMD ["/usr/bin/zsh"]
