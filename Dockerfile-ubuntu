@@ -30,10 +30,10 @@ RUN DEBIAN_FRONTEND=noninteractive \
     dpkg-reconfigure --frontend=noninteractive locales
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
-        libncurses-dev libssl-dev libffi-dev cargo \
+        libncurses-dev libssl-dev libffi-dev \
     && python3 -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
     && apt-get remove -y \
-        libncurses-dev libssl-dev libffi-dev cargo \
+        libncurses-dev libssl-dev libffi-dev \
     && apt-get clean
 RUN gem install --no-document one_gadget seccomp-tools
 
