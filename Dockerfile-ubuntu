@@ -14,8 +14,7 @@ RUN : \
     && rm -r /usr/lib/python*/ensurepip \
     && python3 -m pip install --no-cache-dir -U pip setuptools wheel \
     && ln -sf pip3 /usr/bin/pip \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean
 
 RUN DEBIAN_FRONTEND=noninteractive \
     apt-get install -y -qqq --no-install-recommends \
@@ -23,8 +22,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     strace ltrace tree make cmake elfutils netcat \
     gdb locales binutils g++ g++-multilib musl-tools nasm lib32z1 \
     build-essential perl openssl ruby-dev \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean
 
 RUN DEBIAN_FRONTEND=noninteractive \
     locale-gen --purge "en_US.UTF-8" && \
@@ -36,8 +34,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommen
     && python3 -m pip --no-cache-dir -U install pwntools unicorn capstone ropper keystone-engine \
     && apt-get remove -y \
         libncurses-dev libssl-dev libffi-dev cargo \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
+    && apt-get clean
 RUN gem install --no-document one_gadget seccomp-tools
 
 # RUN cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
