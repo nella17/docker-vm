@@ -31,7 +31,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
 
 RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
         libncurses-dev libssl-dev libffi-dev cargo \
-    && python3 -m pip --no-cache-dir -U install pwntools unicorn capstone ropper keystone-engine \
+    && python3 -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
     && apt-get remove -y \
         libncurses-dev libssl-dev libffi-dev cargo \
     && apt-get clean
