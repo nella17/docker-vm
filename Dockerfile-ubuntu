@@ -7,7 +7,9 @@ RUN : \
     && add-apt-repository ppa:deadsnakes \
     && apt-get update -qq \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
-        python3.10-dev \
+        python3.10-dev python3.10-venv \
+    && python3 -m ensurepip \
+    && rm -r /usr/lib/python*/ensurepip \
     && ln -sf python3.10 /usr/bin/python \
     && ln -sf python3.10 /usr/bin/python3 \
     && python3 -m pip install --no-cache-dir -U pip setuptools wheel \
