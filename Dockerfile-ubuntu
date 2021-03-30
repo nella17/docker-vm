@@ -39,7 +39,6 @@ RUN : \
         libncurses-dev libssl-dev libffi-dev cargo \
     && apt-get purge --auto-remove \
         libncurses-dev libssl-dev libffi-dev cargo \
-        python3-dev python3-pip \
     && apt-get clean
 RUN gem install --no-document one_gadget seccomp-tools
 
