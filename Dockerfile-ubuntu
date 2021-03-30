@@ -6,8 +6,8 @@ RUN : \
         software-properties-common python3-dev python3-pip \
     && add-apt-repository ppa:deadsnakes \
     && apt-get update -qq \
-    && mv /usr/bin/python3 /usr/bin/python3-system \
     && python3 -m pip install --no-cache-dir -U pip setuptools wheel \
+    && mv /usr/bin/python3 /usr/bin/python3-system \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
         python3.10-dev python3.10-venv \
     && ln -sf python3.10 /usr/bin/python \
