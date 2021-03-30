@@ -24,7 +24,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
     && echo 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale \
     && dpkg-reconfigure --frontend=noninteractive locales
 
-RUN ; \
+RUN : \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
         python3-dev python3-pip \
     && python3 -m pip install --no-cache-dir -U pip setuptools wheel \
