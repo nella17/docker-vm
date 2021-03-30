@@ -33,12 +33,14 @@ RUN : \
     && ln -sf python3.10 /usr/bin/python3 \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
         libncurses-dev libssl-dev libffi-dev cargo \
-    && python3 -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
     && python3-system -m pip install --no-cache-dir -U unicorn capstone ropper keystone-engine \
+    && python3 -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
     && apt-get remove -y --auto-remove \
         libncurses-dev libssl-dev libffi-dev cargo \
+        python3-pip \
     && apt-get purge --auto-remove \
         libncurses-dev libssl-dev libffi-dev cargo \
+        python3-pip \
     && apt-get clean
 RUN gem install --no-document one_gadget seccomp-tools
 
