@@ -10,12 +10,6 @@ RUN : \
         python3.10-dev python3.10-venv \
     && python3.10 -m ensurepip \
     && python3.10 -m pip install --no-cache-dir -U pip setuptools wheel \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
-        python3-dev python3-pip \
-    && python3 -m pip install --no-cache-dir -U pip setuptools wheel \
-    && mv /usr/bin/python3 /usr/bin/python3-system \
-    && ln -sf python3.10 /usr/bin/python \
-    && ln -sf python3.10 /usr/bin/python3 \
     && rm -r /usr/lib/python*/ensurepip \
     && apt-get clean
 
@@ -30,7 +24,14 @@ RUN DEBIAN_FRONTEND=noninteractive \
     && echo 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale \
     && dpkg-reconfigure --frontend=noninteractive locales
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
+RUN ; \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
+        python3-dev python3-pip \
+    && python3 -m pip install --no-cache-dir -U pip setuptools wheel \
+    && mv /usr/bin/python3 /usr/bin/python3-system \
+    && ln -sf python3.10 /usr/bin/python \
+    && ln -sf python3.10 /usr/bin/python3 \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
         libncurses-dev libssl-dev libffi-dev cargo \
     && python3 -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
     && python3-system -m pip install --no-cache-dir -U unicorn capstone ropper keystone-engine \
@@ -38,6 +39,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommen
         libncurses-dev libssl-dev libffi-dev cargo \
     && apt-get purge --auto-remove \
         libncurses-dev libssl-dev libffi-dev cargo \
+        python3-dev python3-pip \
     && apt-get clean
 RUN gem install --no-document one_gadget seccomp-tools
 
