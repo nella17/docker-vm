@@ -6,7 +6,7 @@ RUN DEBIAN_FRONTEND=noninteractive \
       sudo file less zsh tmux git vim wget curl rsync \
       strace ltrace tree make cmake elfutils netcat \
       gdb locales binutils g++ g++-multilib musl-tools nasm lib32z1 \
-      build-essential perl openssl ruby-dev \
+      build-essential perl openssl ruby-dev socat \
     && apt-get clean \
     && locale-gen --purge "en_US.UTF-8" \
     && echo 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale \
