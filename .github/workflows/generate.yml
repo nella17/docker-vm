@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
 
 jobs:
   generate:
@@ -13,6 +12,9 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-python@v2
+      - run: |
+          git checkout -t origin/deploy || git checkout -b deploy
+          git merge main
       - run: python generate.py
       - run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
