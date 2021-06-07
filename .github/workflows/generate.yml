@@ -23,5 +23,5 @@ jobs:
       - run: python generate.py
       - run: |
           git add -f Dockerfiles/*
-          git commit -m "build dockerfiles" --allow-empty
+          git commit -m "build dockerfiles" || true
           git push https://${GITHUB_ACTOR}:${{ secrets.GH_TOKEN }}@github.com/${GITHUB_REPOSITORY}.git HEAD:deploy
