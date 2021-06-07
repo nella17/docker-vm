@@ -1,12 +1,13 @@
-FROM ubuntu:latest
+FROM ubuntu:{tag}
 
 RUN : \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
       apt-get install -y -qqq --no-install-recommends \
-      sudo file less zsh tmux git vim wget curl rsync \
-      strace ltrace tree make cmake elfutils netcat \
-      gdb locales binutils g++ g++-multilib musl-tools nasm lib32z1 \
+      sudo file less zsh tmux git vim wget curl rsync htop \
+      strace ltrace tree make cmake elfutils netcat gdb locale \
+      binutils g++ g++-multilib musl-tools nasm \
+      lib32z1 libseccomp-dev \
       build-essential perl openssl ruby-dev socat \
       python3-dev python3-pip \
     && ln -sf python3 /usr/bin/python \
@@ -19,7 +20,8 @@ RUN : \
     && python -m pip install --no-cache-dir -U pip setuptools wheel \
     && DEBIAN_FRONTEND=noninteractive apt-get install -y -qqq --no-install-recommends \
         libncurses-dev libssl-dev libffi-dev cargo \
-    && python -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine pycryptodome \
+    && python -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
+            pycryptodome \
     && apt-get remove -y --auto-remove \
         libncurses-dev libssl-dev libffi-dev cargo \
     && apt-get purge --auto-remove \

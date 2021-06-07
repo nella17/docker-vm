@@ -21,3 +21,5 @@ Temporary Items
 node_modules
 __pycache__
 .env
+Dockerfiles/*
+!Dockerfiles/.gitkeep
