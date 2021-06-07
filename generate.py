@@ -6,5 +6,7 @@ tags = [
 ]
 source = open('./Dockerfile').read()
 for tag in tags:
-    with open(f'./Dockerfiles/{tag}','w') as f:
+    fn = f'./Dockerfiles/{tag}'
+    with open(fn,'w') as f:
         f.write(source.replace('{tag}',tag))
+        print(fn, 'done')
