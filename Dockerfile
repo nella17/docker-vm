@@ -15,7 +15,7 @@ RUN : \
     && rm -rf /var/lib/apt/lists/* \
     \
     && locale-gen --purge "en_US.UTF-8" \
-    && print 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"' >> /etc/default/locale \
+    && printf 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale \
     && dpkg-reconfigure --frontend=noninteractive locales \
     \
     && python -m pip install --no-cache-dir -U pip setuptools wheel \
@@ -29,7 +29,8 @@ RUN : \
         libncurses-dev libssl-dev libffi-dev cargo \
     && apt-get clean \
     \
-    && gem install --no-document one_gadget seccomp-tools
+    && gem install --no-document one_gadget seccomp-tools \
+    && :
 
 # RUN cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
 
