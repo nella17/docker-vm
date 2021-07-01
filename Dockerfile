@@ -11,8 +11,6 @@ RUN : \
       build-essential perl openssl ruby-dev socat \
       python3-dev python3-pip \
     && ln -sf python3 /usr/bin/python \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* \
     \
     && locale-gen --purge "en_US.UTF-8" \
     && printf 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale \
@@ -30,6 +28,8 @@ RUN : \
     && apt-get clean \
     \
     && gem install --no-document one_gadget seccomp-tools \
+    \
+    && rm -rf /var/lib/apt/lists/* \
     && :
 
 # RUN cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
