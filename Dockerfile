@@ -4,7 +4,7 @@ RUN : \
     && apt-get update \
     && DEBIAN_FRONTEND=noninteractive \
       apt-get install -y -qqq --no-install-recommends \
-      sudo file less zsh tmux git vim wget curl rsync htop zip \
+      sudo file less zsh tmux git vim wget curl rsync htop zip unzip \
       strace ltrace tree make cmake elfutils netcat locales net-tools \
       binutils g++ g++-multilib musl-tools nasm gdb \
       lib32z1 libseccomp-dev \
