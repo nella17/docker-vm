@@ -34,10 +34,9 @@ RUN : \
 
 # RUN cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
 
+COPY root /root
+
 ENV PATH="/root/bin:${PATH}"
 ENV LANG="en_US.UTF-8"
-
-COPY libc /libc
-COPY root /root
 
 CMD ["/usr/bin/zsh"]
