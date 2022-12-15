@@ -19,8 +19,8 @@ concurrency:
 
 jobs:
   builder:
-    runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         tag:
         - 'devel'
@@ -29,6 +29,9 @@ jobs:
         - '22.04'
         - '20.04'
         - '18.04'
+
+    runs-on: ubuntu-latest
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
