@@ -11,7 +11,7 @@ permissions:
   packages: write
 
 env:
-  REGISTRY: ghcr.io
+  REGISTRY: hub.docker.com
   IMAGE_NAME: ${{ github.repository }}
 
 concurrency:
@@ -38,7 +38,7 @@ jobs:
         with:
           registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ secrets.LOGIN_TOKEN }}
 
       - name: Extract metadata (tags, labels) for Docker
         id: meta
