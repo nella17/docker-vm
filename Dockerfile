@@ -12,8 +12,9 @@ RUN : \
       binutils g++ g++-multilib musl-tools nasm gdb \
       lib32z1 libseccomp-dev \
       build-essential perl openssl ruby-dev socat \
-      python3-dev python3-pip python-is-python3 \
+      python3-dev python3-pip \
       glibc-source gawk bison \
+    && ln -sf python3 /usr/bin/python \
     \
     && locale-gen --purge "en_US.UTF-8" \
     && printf 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale \
