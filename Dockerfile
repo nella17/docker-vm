@@ -1,4 +1,4 @@
-FROM ubuntu:{tag}
+FROM ubuntu:tag
 
 RUN : \
     && apt-get update \
