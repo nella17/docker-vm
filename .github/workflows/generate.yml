@@ -11,7 +11,6 @@ permissions:
   packages: write
 
 env:
-  REGISTRY: hub.docker.com
   IMAGE_NAME: ${{ github.repository }}
 
 concurrency:
@@ -36,7 +35,6 @@ jobs:
       - name: Log in to the Container registry
         uses: docker/login-action@v2
         with:
-          registry: ${{ env.REGISTRY }}
           username: ${{ github.actor }}
           password: ${{ secrets.LOGIN_TOKEN }}
 
@@ -44,7 +42,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v4
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_NAME }}
           tags: latest
 
       - name: Build and push Docker image
