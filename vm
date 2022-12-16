@@ -1,43 +1,43 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-docker ps > /dev/null || exit -1
+docker ps > /dev/null || exit 255
 
-version=$(basename $0)
+version=$(basename "$0")
 version=${version#vm}
 version=${version#-}
-if [ ! $version ]; then
+if [ ! "$version" ]; then
   version='latest'
 fi
 
 name="vm_${version}_$(pwd | sha1sum | awk '{print $1}')"
 
-args=()
+argv=()
 while [[ $# -gt 0 ]]; do
   if [[ $1 == -* ]]; then
-    args+=("$1 $2")
+    argv+=("$1 $2")
     shift
     shift
   else
     break
   fi
 done
-args="${args[@]}"
+args="${argv[*]}"
 
 cmd="zsh"
 if [ $# -gt 0 ]; then
-  cmd="$@"
+  cmd="$*"
 fi
 
->&2 echo name: $name
->&2 echo args: $args
->&2 echo cmd: $cmd
+>&2 echo "name: $name"
+>&2 echo "args: $args"
+>&2 echo "cmd: $cmd"
 
 exist=$(docker ps -q -f "name=$name")
-already_run=$(ps x | grep docker | grep run | grep $name | wc -l)
+already_run=$(pgrep -lf 'docker run' | grep -c "$name")
 if [[ ! $exist ]] && [[ $already_run -eq 0 ]]; then
   >&2 echo -n 'start container: '
   docker run --rm -dt \
-    --name $name \
+    --name "$name" \
     -v "$PWD:/data" \
     --cap-add=SYS_PTRACE \
     --security-opt seccomp=unconfined \
@@ -45,11 +45,11 @@ if [[ ! $exist ]] && [[ $already_run -eq 0 ]]; then
     nella17/vm:$version
 fi
 
-docker exec -it -w '/data' $name zsh -c "source ~/.zshrc && $cmd"
+docker exec -it -w '/data' "$name" zsh -c "source ~/.zshrc && $cmd"
 
-count=$(ps x | grep docker | grep exec | grep $name | wc -l)
+count=$(pgrep -lf 'docker exec' | grep -c "$name")
 exist=$(docker ps -q -f "name=$name")
 if [[ $count -eq 0 ]] && [[ $exist ]]; then
   >&2 echo -n 'shutdown container: '
-  docker stop $name
+  docker stop "$name"
 fi
