@@ -43,11 +43,11 @@ RUN : \
     \
     && gem install --no-document one_gadget seccomp-tools \
     \
+    && nproc \
     && cd /usr/src/glibc \
-    && tar xvf glibc-*.tar.xz \
+    && tar xf glibc-*.tar.xz \
     && mkdir glibc_dbg && cd glibc_dbg \
     && ../glibc-*/configure --prefix $PWD --enable-debug \
-    && nproc \
     && make -j$(nproc) > /dev/null \
     \
     && rm -rf /var/lib/apt/lists/* \
