@@ -47,7 +47,7 @@ RUN : \
     && tar xf glibc-*.tar.xz \
     && mkdir glibc_dbg && cd glibc_dbg \
     && ../glibc-*/configure --prefix $PWD --enable-debug \
-    && make -j4 > /dev/null \
+    && make -j$(nproc) > /dev/null \
     \
     && rm -rf /var/lib/apt/lists/* \
     && :
