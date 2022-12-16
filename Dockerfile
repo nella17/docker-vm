@@ -8,7 +8,7 @@ COPY root /root
 
 RUN : \
     && apt-get update \
-    && apt-get install -y -qqq --no-install-recommends \
+    && apt-get -qqq install -y --no-install-recommends \
       sudo file less zsh tmux git vim wget curl rsync htop zip unzip \
       strace ltrace tree make cmake elfutils locales net-tools \
       binutils g++ g++-multilib musl-tools nasm gdb patchelf \
@@ -16,7 +16,7 @@ RUN : \
       build-essential perl openssl ruby-dev socat \
       python3-dev python3-pip \
       glibc-source gawk bison \
-    && (apt-get install -y -qqq --no-install-recommends netcat || true) \
+    && (apt-get -qqq install -y --no-install-recommends netcat || true) \
     && ln -sf python3 /usr/bin/python \
     \
     && locale-gen --purge "en_US.UTF-8" \
@@ -31,7 +31,7 @@ RUN : \
     && rm -f /tmp/ynetd.zip \
     \
     && python -m pip install --no-cache-dir -U pip setuptools wheel \
-    && apt-get install -y -qqq --no-install-recommends \
+    && apt-get -qqq install -y --no-install-recommends \
         libncurses-dev libssl-dev libffi-dev cargo \
     && python -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
             pycryptodome \
@@ -43,12 +43,11 @@ RUN : \
     \
     && gem install --no-document one_gadget seccomp-tools \
     \
-    && nproc \
     && cd /usr/src/glibc \
     && tar xf glibc-*.tar.xz \
     && mkdir glibc_dbg && cd glibc_dbg \
     && ../glibc-*/configure --prefix $PWD --enable-debug \
-    && make -j$(nproc) > /dev/null \
+    && make -j4 > /dev/null \
     \
     && rm -rf /var/lib/apt/lists/* \
     && :
