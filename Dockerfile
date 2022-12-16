@@ -10,12 +10,13 @@ RUN : \
     && apt-get update \
     && apt-get install -y -qqq --no-install-recommends \
       sudo file less zsh tmux git vim wget curl rsync htop zip unzip \
-      strace ltrace tree make cmake elfutils netcat locales net-tools \
+      strace ltrace tree make cmake elfutils locales net-tools \
       binutils g++ g++-multilib musl-tools nasm gdb patchelf \
       lib32z1 libseccomp-dev \
       build-essential perl openssl ruby-dev socat \
       python3-dev python3-pip \
       glibc-source gawk bison \
+    && (apt-get install -y -qqq --no-install-recommends netcat || true) \
     && ln -sf python3 /usr/bin/python \
     \
     && locale-gen --purge "en_US.UTF-8" \
