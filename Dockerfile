@@ -13,7 +13,7 @@ RUN : \
       strace ltrace tree make cmake elfutils locales net-tools \
       binutils g++ g++-multilib musl-tools nasm gdb patchelf \
       lib32z1 libseccomp-dev \
-      build-essential perl openssl ruby-dev socat \
+      build-essential perl openssl ruby-dev socat xinetd \
       python3-dev python3-pip \
       glibc-source gawk bison \
     && (apt-get -qqq install -y --no-install-recommends netcat || true) \
