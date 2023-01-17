@@ -1,4 +1,4 @@
-name: Generate Dockerfiles
+name: Build Images
 
 on:
   push:
