@@ -48,6 +48,8 @@ RUN : \
     && mkdir glibc_dbg && cd glibc_dbg \
     && ../glibc-*/configure --prefix $PWD --enable-debug \
     && make -j$(nproc) > /dev/null \
+    && echo set substitute-path ../ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
+    && echo set substitute-path ./ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
     \
     && cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh \
     \
