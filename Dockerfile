@@ -49,9 +49,10 @@ RUN : \
     && ../glibc-*/configure --prefix $PWD --enable-debug \
     && make -j$(nproc) > /dev/null \
     \
+    && cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh \
+    \
     && rm -rf /var/lib/apt/lists/* \
     && :
 
-# RUN cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
 
 CMD ["/usr/bin/zsh"]
