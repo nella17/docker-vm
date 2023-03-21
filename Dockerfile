@@ -51,7 +51,9 @@ RUN : \
     && echo set substitute-path ../ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
     && echo set substitute-path ./ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
     \
+    && mv ~/.gdbinit /tmp/gdbinit \
     && cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh \
+    && mv /tmp/gdbinit ~/.gdbinit \
     \
     && rm -rf /var/lib/apt/lists/* \
     && :
