@@ -60,6 +60,7 @@ RUN : \
     && radare2/sys/install.sh \
     && r2pm -U \
     && r2pm -ci r2ghidra r2dec \
+    && python -m pip install --no-cache-dir -U r2pipe \
     \
     && rm -rf /var/lib/apt/lists/* \
     && :
