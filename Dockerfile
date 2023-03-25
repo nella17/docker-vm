@@ -23,7 +23,18 @@ RUN : \
     && printf 'LANG="en_US.UTF-8"\nLANGUAGE="en_US:en"\n' >> /etc/default/locale \
     && dpkg-reconfigure locales \
     \
-    && wget -O ~/.gdbinit-gef.py -q https://gef.blah.cat/py \
+    && cd /usr/src/glibc \
+    && tar xf glibc-*.tar.xz \
+    && mkdir glibc_dbg && cd glibc_dbg \
+    && ../glibc-*/configure --prefix $PWD --enable-debug \
+    && make -j$(nproc) > /dev/null \
+    && echo set substitute-path ../ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
+    && echo set substitute-path ./ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
+    \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN : \
+    && apt-get update \
     \
     && YNETD_VERSION=v0.14 \
     && wget -qO /tmp/ynetd.zip https://github.com/rwstauner/ynetd/releases/download/$YNETD_VERSION/ynetd-linux-amd64.zip \
@@ -43,13 +54,7 @@ RUN : \
     \
     && gem install --no-document one_gadget seccomp-tools \
     \
-    && cd /usr/src/glibc \
-    && tar xf glibc-*.tar.xz \
-    && mkdir glibc_dbg && cd glibc_dbg \
-    && ../glibc-*/configure --prefix $PWD --enable-debug \
-    && make -j$(nproc) > /dev/null \
-    && echo set substitute-path ../ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
-    && echo set substitute-path ./ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
+    && wget -O ~/.gdbinit-gef.py -q https://gef.blah.cat/py \
     \
     && mv ~/.gdbinit /tmp/gdbinit \
     && cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh \
@@ -62,8 +67,7 @@ RUN : \
     && r2pm -ci r2ghidra r2dec \
     && python -m pip install --no-cache-dir -U r2pipe \
     \
-    && rm -rf /var/lib/apt/lists/* \
-    && :
+    && rm -rf /var/lib/apt/lists/*
 
 
 CMD ["/usr/bin/zsh"]
