@@ -33,7 +33,7 @@ fi
 >&2 echo "cmd: $cmd"
 
 exist=$(docker ps -q -f "name=$name")
-already_run=$(pgrep -lf 'docker run' | grep -c "$name")
+already_run=$(pgrep -af 'docker run' | grep -c "$name")
 if [[ ! $exist ]] && [[ $already_run -eq 0 ]]; then
   >&2 echo -n 'start container: '
   docker run --rm -dt \
@@ -47,7 +47,7 @@ fi
 
 docker exec -it -w '/data' "$name" zsh -c "source ~/.zshrc && $cmd"
 
-count=$(pgrep -lf 'docker exec' | grep -c "$name")
+count=$(pgrep -af 'docker exec' | grep -c "$name")
 exist=$(docker ps -q -f "name=$name")
 if [[ $count -eq 0 ]] && [[ $exist ]]; then
   >&2 echo -n 'shutdown container: '
