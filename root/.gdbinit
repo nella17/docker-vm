@@ -1,6 +1,7 @@
 set history filename ~/.gdb_history
 set disassembly-flavor intel
 set print asm-demangle on
+set output-radix 16
 
 define peda
   source ~/peda/peda.py
