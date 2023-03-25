@@ -60,6 +60,8 @@ RUN : \
     && cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh \
     && mv /tmp/gdbinit ~/.gdbinit \
     \
+    && cd /root && git clone https://github.com/jerdna-regeiz/splitmind \
+    \
     && cd /root \
     && git clone --depth=1 https://github.com/radareorg/radare2 \
     && radare2/sys/install.sh \
