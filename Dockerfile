@@ -4,8 +4,6 @@ ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/root/bin:${PATH}"
 ENV LANG="en_US.UTF-8"
 
-COPY root /root
-
 RUN : \
     && apt-get update \
     && apt-get -qqq install -y --no-install-recommends \
@@ -28,8 +26,6 @@ RUN : \
     && mkdir glibc_dbg && cd glibc_dbg \
     && ../glibc-*/configure --prefix $PWD --enable-debug \
     && make -j$(nproc) > /dev/null \
-    && echo set substitute-path ../ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
-    && echo set substitute-path ./ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
     \
     && rm -rf /var/lib/apt/lists/*
 
@@ -54,15 +50,13 @@ RUN : \
     \
     && gem install --no-document one_gadget seccomp-tools \
     \
-    && wget -O ~/.gdbinit-gef.py -q https://gef.blah.cat/py \
+    && wget -O /opt/.gdbinit-gef.py -q https://gef.blah.cat/py \
     \
-    && mv ~/.gdbinit /tmp/gdbinit \
-    && cd /root && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh \
-    && mv /tmp/gdbinit ~/.gdbinit \
+    && cd /opt && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh \
     \
-    && cd /root && git clone https://github.com/jerdna-regeiz/splitmind \
+    && cd /opt && git clone https://github.com/jerdna-regeiz/splitmind \
     \
-    && cd /root \
+    && cd /opt \
     && git clone --depth=1 https://github.com/radareorg/radare2 \
     && radare2/sys/install.sh \
     && r2pm -U \
@@ -71,5 +65,11 @@ RUN : \
     \
     && rm -rf /var/lib/apt/lists/*
 
+COPY ./root/ /root/
+
+RUN : \
+    && echo set substitute-path ../ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
+    && echo set substitute-path ./ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit \
+    :
 
 CMD ["/usr/bin/zsh"]

@@ -3,21 +3,16 @@ set disassembly-flavor intel
 set print asm-demangle on
 set output-radix 16
 
-define peda
-  source ~/peda/peda.py
-  pset option autosave 'off'
-end
-
 define gef
-  source ~/.gdbinit-gef.py
+  source /opt/gdbinit-gef.py
 end
 
 define pwndbg-init
-  source ~/pwndbg/gdbinit.py
+  source /opt/pwndbg/gdbinit.py
 end
 
 define splitmind
-  source ~/splitmind/gdbinit.py
+  source /opt/splitmind/gdbinit.py
   python
 import splitmind
 (splitmind.Mind()
