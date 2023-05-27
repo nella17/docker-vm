@@ -15,6 +15,7 @@ RUN : \
       python3-dev python3-pip \
       glibc-source gawk bison \
     && (apt-get -qqq install -y --no-install-recommends netcat || true) \
+    && (apt-get -qqq install -y --no-install-recommends ncat || true) \
     && ln -sf python3 /usr/bin/python \
     \
     && locale-gen --purge "en_US.UTF-8" \
