@@ -40,7 +40,7 @@ RUN : \
     && python -m pip install --no-cache-dir -U pip setuptools wheel \
     && apt-get -qqq install -y --no-install-recommends \
         libncurses-dev libssl-dev libffi-dev cargo \
-    && python -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine \
+    && python -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine ptrlib \
             pycryptodome \
     && apt-get remove -y --auto-remove \
         libncurses-dev libssl-dev libffi-dev cargo \
