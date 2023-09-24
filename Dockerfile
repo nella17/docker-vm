@@ -51,7 +51,7 @@ RUN : \
     \
     && gem install --no-document one_gadget seccomp-tools \
     \
-    && wget -O /opt/.gdbinit-gef.py -q https://gef.blah.cat/py \
+    && wget -O /opt/gdbinit-gef.py -q https://gef.blah.cat/py \
     \
     && cd /opt && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh \
     \
