@@ -5,7 +5,7 @@ ENV PATH="/root/bin:${PATH}"
 ENV LANG="en_US.UTF-8"
 
 RUN <<EOF
-    set -x
+    set -eux
     apt-get update
     apt-get -qqq install -y --no-install-recommends \
       sudo file less zsh tmux git vim wget curl rsync htop zip unzip \
@@ -32,7 +32,7 @@ RUN <<EOF
 EOF
 
 RUN <<EOF
-    set -x
+    set -eux
     apt-get update
 
     YNETD_VERSION=v0.14
@@ -72,7 +72,7 @@ EOF
 COPY ./root/ /root/
 
 RUN <<EOF
-    set -x
+    set -eux
     echo set substitute-path ../ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit
     echo set substitute-path ./ /usr/src/glibc/glibc-*/ | tee -a ~/.gdbinit
 EOF
