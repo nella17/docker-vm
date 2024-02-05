@@ -44,7 +44,7 @@ RUN <<EOF
 
     python -m pip install --no-cache-dir -U pip setuptools wheel
     python -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine ptrlib \
-            pycryptodome
+            pycryptodome tqdm joblib
 
     gem install --no-document one_gadget seccomp-tools
 
