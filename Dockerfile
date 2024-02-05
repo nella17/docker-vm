@@ -3,6 +3,7 @@ FROM ubuntu:tag
 ENV DEBIAN_FRONTEND=noninteractive
 ENV PATH="/root/bin:${PATH}"
 ENV LANG="en_US.UTF-8"
+ENV PIP_BREAK_SYSTEM_PACKAGES=1
 
 RUN <<EOF
     set -eux
@@ -42,9 +43,11 @@ RUN <<EOF
     unzip -d /usr/local/bin/ /tmp/ynetd.zip
     rm -f /tmp/ynetd.zip
 
-    python -m pip install --no-cache-dir -U pip setuptools wheel
-    python -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine ptrlib \
-            pycryptodome tqdm joblib
+    python -m pip install --no-cache-dir -U \
+        pip setuptools wheel
+    python -m pip install --no-cache-dir -U \
+        pwntools unicorn capstone ropper keystone-engine ptrlib \
+        pycryptodome tqdm joblib
 
     gem install --no-document one_gadget seccomp-tools
 
