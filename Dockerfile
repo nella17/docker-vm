@@ -34,6 +34,8 @@ EOF
 RUN <<EOF
     set -eux
     apt-get update
+    LIBS="libncurses-dev libssl-dev libffi-dev cargo ninja-build meson"
+    apt-get -qqq install -y --no-install-recommends $LIBS 
 
     YNETD_VERSION=v0.14
     wget -qO /tmp/ynetd.zip https://github.com/rwstauner/ynetd/releases/download/$YNETD_VERSION/ynetd-linux-amd64.zip
@@ -41,15 +43,8 @@ RUN <<EOF
     rm -f /tmp/ynetd.zip
 
     python -m pip install --no-cache-dir -U pip setuptools wheel
-    apt-get -qqq install -y --no-install-recommends \
-        libncurses-dev libssl-dev libffi-dev cargo
     python -m pip install --no-cache-dir -U pwntools unicorn capstone ropper keystone-engine ptrlib \
             pycryptodome
-    apt-get remove -y --auto-remove \
-        libncurses-dev libssl-dev libffi-dev cargo
-    apt-get purge --auto-remove \
-        libncurses-dev libssl-dev libffi-dev cargo
-    apt-get clean
 
     gem install --no-document one_gadget seccomp-tools
 
@@ -66,6 +61,9 @@ RUN <<EOF
     r2pm -ci r2ghidra r2dec
     python -m pip install --no-cache-dir -U r2pipe
 
+    apt-get remove -y --auto-remove $LIBS
+    apt-get purge --auto-remove $LIBS
+    apt-get clean
     rm -rf /var/lib/apt/lists/*
 EOF
 
