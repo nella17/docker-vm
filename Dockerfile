@@ -28,6 +28,7 @@ RUN <<EOF
     mkdir glibc_dbg && cd glibc_dbg
     ../glibc-*/configure --prefix $PWD --enable-debug
     make -j$(nproc) > /dev/null
+    make -j$(nproc) clean > /dev/null
 
     rm -rf /var/lib/apt/lists/*
 EOF
