@@ -50,7 +50,7 @@ RUN <<EOF
         pwntools unicorn capstone ropper keystone-engine ptrlib \
         pycryptodome tqdm joblib
 
-    source /etc/os-release
+    VERSION_ID=$(grep '^VERSION_ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
     case "$VERSION_ID" in
         "20.04")
             gem install elftools -v 1.2.0
