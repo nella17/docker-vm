@@ -53,13 +53,14 @@ RUN <<EOF
     VERSION_ID=$(grep '^VERSION_ID=' /etc/os-release | cut -d= -f2 | tr -d '"')
     case "$VERSION_ID" in
         "20.04")
-            gem install elftools -v 1.2.0
+            gem install --no-document elftools:1.2.0 one_gadget:1.9.0
             ;;
         *)
+            gem install --no-document one_gadget
             ;;
     esac
     
-    gem install --no-document one_gadget seccomp-tools
+    gem install --no-document seccomp-tools
 
     wget -O /opt/gdbinit-gef.py -q https://gef.blah.cat/py
 
