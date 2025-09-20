@@ -45,7 +45,7 @@ RUN <<EOF
     rm -f /tmp/ynetd.zip
 
     python -m pip install --no-cache-dir -U \
-        pip setuptools
+        setuptools
     python -m pip install --no-cache-dir -U \
         pwntools unicorn capstone ropper keystone-engine ptrlib \
         pycryptodome tqdm joblib
