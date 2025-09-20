@@ -55,6 +55,8 @@ RUN <<EOF
         "20.04")
             gem install elftools -v 1.2.0
             ;;
+        *)
+            ;;
     esac
     
     gem install --no-document one_gadget seccomp-tools
