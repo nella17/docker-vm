@@ -50,6 +50,13 @@ RUN <<EOF
         pwntools unicorn capstone ropper keystone-engine ptrlib \
         pycryptodome tqdm joblib
 
+    source /etc/os-release
+    case "$VERSION_ID" in
+        "20.04")
+            gem install elftools -v 1.2.0
+            ;;
+    esac
+    
     gem install --no-document one_gadget seccomp-tools
 
     wget -O /opt/gdbinit-gef.py -q https://gef.blah.cat/py
