@@ -67,7 +67,7 @@ RUN <<EOF
     cd /opt && git clone https://github.com/pwndbg/pwndbg && cd pwndbg
     case "$VERSION_ID" in
         "20.04")
-            git switch 2024.08.29
+            git checkout 2024.08.29
             curl -sSL https://install.python-poetry.org | python3 - --version 1.8.5
             ;;
         *)
