@@ -81,7 +81,8 @@ RUN <<EOF
     git clone --depth=1 https://github.com/radareorg/radare2
     radare2/sys/install.sh
     r2pm -U
-    r2pm -ci r2ghidra r2dec
+    r2pm -ci r2ghidra || true
+    r2pm -ci r2dec || true
     python -m pip install --no-cache-dir -U r2pipe
 
     apt-get remove -y --auto-remove $LIBS
