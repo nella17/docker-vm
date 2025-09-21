@@ -64,7 +64,15 @@ RUN <<EOF
 
     wget -O /opt/gdbinit-gef.py -q https://gef.blah.cat/py
 
-    cd /opt && git clone https://github.com/pwndbg/pwndbg && cd pwndbg && ./setup.sh
+    cd /opt && git clone https://github.com/pwndbg/pwndbg && cd pwndbg
+    case "$VERSION_ID" in
+        "20.04")
+            git checkout 2024.08.29
+            ;;
+        *)
+            ;;
+    esac
+    ./setup.sh
 
     cd /opt && git clone https://github.com/jerdna-regeiz/splitmind
 
