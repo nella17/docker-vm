@@ -69,6 +69,7 @@ RUN <<EOF
         "20.04")
             git checkout 2024.08.29
             curl -sSL https://install.python-poetry.org | python3 - --version 1.8.5
+            export PATH="/root/.local/bin:$PATH"
             ;;
         *)
             ;;
