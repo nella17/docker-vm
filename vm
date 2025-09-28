@@ -47,9 +47,9 @@ fi
 
 docker exec -it -w '/data' "$name" zsh -c "source ~/.zshrc && $cmd"
 
-count=$(pgrep -af 'docker exec' | grep -c "$name")
+count=$(pgrep -af "$name" | wc -l)
 exist=$(docker ps -q -f "name=$name")
-if [[ $count -eq 0 ]] && [[ $exist ]]; then
+if [[ "$count" -eq 0 ]] && [[ "$exist" ]]; then
   >&2 echo -n 'shutdown container: '
   docker stop "$name"
 fi
