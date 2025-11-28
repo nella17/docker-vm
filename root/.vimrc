@@ -1,11 +1,6 @@
-" for pane moving
-nnoremap <C-J> <C-W><C-J>
-nnoremap <C-K> <C-W><C-K>
-nnoremap <C-H> <C-W><C-H>
-nnoremap <C-L> <C-W><C-L>
-
 " short custom config
-set nocp nu rnu cul noswf sc nosmd
+set nocp nu rnu cul sc nosmd
+"set noswf 
 "set mouse=a
 au WinEnter * setl cul
 au WinLeave * setl nocul
